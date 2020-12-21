@@ -5,20 +5,22 @@ from algorithms.dynamic_programming.fibonacci import (
     recursive_fibonacci,
 )
 
+FIBONACCI_SEQUENCE = [
+    (0, 0),
+    (1, 1),
+    (2, 1),
+    (3, 2),
+    (4, 3),
+    (5, 5),
+    (6, 8),
+    (7, 13),
+    (8, 21),
+]
+
 
 @pytest.mark.parametrize(
     "input_,expected",
-    [
-        (0, 0),
-        (1, 1),
-        (2, 1),
-        (3, 2),
-        (4, 3),
-        (5, 5),
-        (6, 8),
-        (7, 13),
-        (8, 21),
-    ],
+    FIBONACCI_SEQUENCE,
 )
 def test_recursive_fibonacci_correctness(input_: int, expected: int) -> None:
     actual = recursive_fibonacci(input_)
@@ -41,17 +43,7 @@ def test_recursive_fibonacci_performance(benchmark) -> None:
 
 @pytest.mark.parametrize(
     "input_,expected",
-    [
-        (0, 0),
-        (1, 1),
-        (2, 1),
-        (3, 2),
-        (4, 3),
-        (5, 5),
-        (6, 8),
-        (7, 13),
-        (8, 21),
-    ],
+    FIBONACCI_SEQUENCE,
 )
 def test_cached_recursive_fibonacci_correctness(input_: int, expected: int) -> None:
     actual = cached_recursive_fibonacci(input_)
@@ -69,17 +61,7 @@ def test_cached_recursive_fibonacci_performance(benchmark) -> None:
 
 @pytest.mark.parametrize(
     "input_,expected",
-    [
-        (0, 0),
-        (1, 1),
-        (2, 1),
-        (3, 2),
-        (4, 3),
-        (5, 5),
-        (6, 8),
-        (7, 13),
-        (8, 21),
-    ],
+    FIBONACCI_SEQUENCE,
 )
 def test_dynamic_programming_fibonacci_correctness(input_: int, expected: int) -> None:
     actual = dynamic_programming_fibonacci(input_)
