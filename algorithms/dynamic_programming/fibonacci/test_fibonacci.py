@@ -2,6 +2,7 @@ import pytest
 from algorithms.dynamic_programming.fibonacci import (
     cached_recursive_fibonacci,
     dynamic_programming_fibonacci,
+    dynamic_programming_memo_reuse_fibonacci,
     recursive_fibonacci,
 )
 
@@ -33,6 +34,7 @@ def test_recursive_fibonacci_flags_recursion_limit():
         recursive_fibonacci(10000)
 
 
+@pytest.mark.benchmark(group="fibonacci")
 def test_recursive_fibonacci_performance(benchmark) -> None:
     expected = 75025
 
@@ -51,6 +53,7 @@ def test_cached_recursive_fibonacci_correctness(input_: int, expected: int) -> N
     assert actual == expected
 
 
+@pytest.mark.benchmark(group="fibonacci")
 def test_cached_recursive_fibonacci_performance(benchmark) -> None:
     expected = 75025
 
@@ -69,9 +72,31 @@ def test_dynamic_programming_fibonacci_correctness(input_: int, expected: int) -
     assert actual == expected
 
 
+@pytest.mark.benchmark(group="fibonacci")
 def test_dynamic_programming_fibonacci_performance(benchmark) -> None:
     expected = 75025
 
     result = benchmark(dynamic_programming_fibonacci, 25)
+
+    assert result == expected
+
+
+@pytest.mark.parametrize(
+    "input_,expected",
+    FIBONACCI_SEQUENCE,
+)
+def test_dynamic_programming_memo_reuse_fibonacci_correctness(
+    input_: int, expected: int
+) -> None:
+    actual = dynamic_programming_memo_reuse_fibonacci(input_)
+
+    assert actual == expected
+
+
+@pytest.mark.benchmark(group="fibonacci")
+def test_dynamic_programming_memo_reuse_fibonacci_performance(benchmark) -> None:
+    expected = 75025
+
+    result = benchmark(dynamic_programming_memo_reuse_fibonacci, 25)
 
     assert result == expected

@@ -45,3 +45,19 @@ def dynamic_programming_fibonacci(n: int) -> int:
         memo[i] = memo[i - 1] + memo[i - 2]
 
     return memo[n]
+
+
+def dynamic_programming_memo_reuse_fibonacci(n: int) -> int:
+    """
+    Uses single set of reused memo-isation to calculate sub-results as it goes
+    """
+    if n in [0, 1]:
+        return n
+
+    memo_1, memo_2 = 0, 1
+
+    for _ in range(2, n + 1):
+        num = memo_1 + memo_2
+        memo_1, memo_2 = memo_2, num
+
+    return num

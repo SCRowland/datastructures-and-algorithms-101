@@ -9,9 +9,17 @@ This repo does not contain production code, the wheel will be re-invented in aid
 
 Most tests include benchmarking to compare implementations.
 
-#### Run all tests:
+#### Run all tests and benchmarks:
 
 `pipenv run pytest`
+
+#### Run only benchmarks (skip unit tests):
+
+`pipenv run pytest --benchmark-only`
+
+### Run only unit tests (skip benchmarks):
+
+`pipenv run pytest --benchmark-skip`
 
 #### Run specific test group:
 
